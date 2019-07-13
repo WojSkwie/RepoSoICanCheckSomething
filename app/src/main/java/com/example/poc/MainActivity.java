@@ -1,5 +1,6 @@
 package com.example.poc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
+import com.example.poc.models.Hotel;
+import com.example.poc.models.Room;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -78,18 +84,30 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+
+
+        if (id == R.id.nav_clients) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_reservations) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_hotels) {
 
-        } else if (id == R.id.nav_tools) {
+        } else if (id == R.id.nav_rooms) {
+            ArrayList<Room> rooms = new ArrayList<>();
+            Hotel hotel = new Hotel(0,"Tutaj", 1, new ArrayList<Room>(), "Tfuj stary pijany");
+            rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));
+            rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));
 
+            Intent intent = new Intent(this, RoomsActivity.class);
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("rooms",rooms);
+            intent.putExtra("roomsBundle", bundle);
+            startActivity(intent);
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

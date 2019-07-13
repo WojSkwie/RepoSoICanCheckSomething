@@ -1,11 +1,13 @@
 package com.example.poc.models;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Room {
+public class Room implements Serializable {
 
     private int id;
     private double price;
@@ -13,4 +15,5 @@ public class Room {
     private int beds;
     private boolean hasSeparateBathroom;
     private boolean isNoSmokingRoom;
+    private Hotel hotel;
 }

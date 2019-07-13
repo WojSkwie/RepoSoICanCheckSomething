@@ -13,4 +13,10 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="title_activity_reservations">ReservationsActivity</string>
+    <string name="reservations_nav_string">Reservations</string>
+    <string name="clients_nav_string">Clients</string>
+    <string name="hotels_nav_string">Hotels</string>
+    <string name="rooms_nav_string">Settings</string>
+    <string name="title_activity_rooms">RoomsActivity</string>
 </resources>
