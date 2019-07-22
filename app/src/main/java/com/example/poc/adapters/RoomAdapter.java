@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.poc.R;
@@ -15,8 +16,11 @@ import java.util.ArrayList;
 
 public class RoomAdapter extends ArrayAdapter<Room> {
 
+    private ArrayList<Room> rooms;
+
     public RoomAdapter(Context context, ArrayList<Room> rooms) {
         super(context, 0, rooms);
+        this.rooms = rooms;
     }
 
     @SuppressLint("DefaultLocale")
@@ -27,6 +31,12 @@ public class RoomAdapter extends ArrayAdapter<Room> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_room, parent, false);
         }
+
+        Button buttonRemove = (Button) convertView.findViewById(R.id.btnRemoveRoom);
+        buttonRemove.setOnClickListener((view) -> {
+            rooms.remove(position);
+            notifyDataSetChanged();
+        });
 
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tvPrice);
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tvNumber);

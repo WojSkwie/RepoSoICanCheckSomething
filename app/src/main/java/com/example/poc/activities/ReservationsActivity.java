@@ -1,4 +1,4 @@
-package com.example.poc;
+package com.example.poc.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.poc.R;
 import com.example.poc.adapters.ReservationAdapter;
 import com.example.poc.models.Reservation;
 

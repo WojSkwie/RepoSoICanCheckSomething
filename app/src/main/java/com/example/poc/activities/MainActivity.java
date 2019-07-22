@@ -1,7 +1,8 @@
-package com.example.poc;
+package com.example.poc.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.poc.R;
 import com.example.poc.models.Hotel;
 import com.example.poc.models.Room;
 
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ArrayList<Hotel> hotels = new ArrayList<>();
+    ArrayList<Room> rooms = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,13 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        Hotel hotel = new Hotel(0,"Tutaj", 1, new ArrayList<Room>(), "Pierwszy");
+        Hotel hotel2 = new Hotel(0,"Tutaj", 1, new ArrayList<Room>(), "Drugi");
+        hotels.add(hotel);
+        hotels.add(hotel2);
+        /*rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));
+        rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));*/
     }
 
     @Override
@@ -93,21 +105,26 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_hotels) {
 
         } else if (id == R.id.nav_rooms) {
-            ArrayList<Room> rooms = new ArrayList<>();
-            Hotel hotel = new Hotel(0,"Tutaj", 1, new ArrayList<Room>(), "Tfuj stary pijany");
-            rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));
-            rooms.add(new Room(0,1.2, 201, 1, false,false, hotel));
 
             Intent intent = new Intent(this, RoomsActivity.class);
-
             Bundle bundle = new Bundle();
             bundle.putSerializable("rooms",rooms);
+            bundle.putSerializable("hotels",hotels);
             intent.putExtra("roomsBundle", bundle);
-            startActivity(intent);
+            startActivityForResult(intent,1);
         }
 
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == 1){
+            rooms = (ArrayList<Room>)( data.getBundleExtra("roomsBundle").getSerializable("rooms"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }
